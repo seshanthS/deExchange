@@ -83,7 +83,19 @@ module.exports = {
   // used with "embark run livenet"
   livenet: {
   },
-
+  infura: {
+  deployment:{
+    accounts: [
+      {
+        mnemonic: "C699B2242D1274686D01095505E37D12C682B18519FB1D8C710565743872DE50"
+      }
+    ],
+    host: "ropsten.infura.io/v3/26a5f300569d4e938e10e3abd2caef74",
+    port: false,
+    protocol: 'https',
+    type: "rpc"
+  }
+}
   // you can name an environment with specific settings and then specify with
   // "embark run custom_name" or "embark blockchain custom_name"
   //custom_name: {

@@ -1,0 +1,62 @@
+import EmbarkJS from 'Embark/EmbarkJS';
+import Web3 from 'web3'
+import { Exchange } from '../../embarkArtifacts/contracts'
+
+// import your contracts
+// e.g if you have a contract named SimpleStorage:
+//import SimpleStorage from 'Embark/contracts/SimpleStorage';
+
+web3 = new Web3(ethereum)
+//accounts = web3.eth.getAccounts();
+EmbarkJS.onReady(async(err) => {
+  await enableProvider()
+  setTimeout(async()=>{
+    let balance = await web3.eth.getBalance("0x1e5019fC69aD7bD0b0f187F1E3f1d68dC2d329FF")
+    let balanceDivElement = window.document.getElementById('balanceDiv')
+   // console.log(accounts[0])
+    balanceDivElement.innerText = balance;
+
+ },1000)
+  depositEther("1000000000000000000")
+
+});
+
+function trade(){}
+function scanQRCode(){
+  window.ethereum
+ .scanQRCode()
+ .then(data => {
+   console.log('QR Scanned:', data)
+ })
+ .catch(err => {
+   console.log('Error:', err)
+ })
+}
+
+function checkStatusBrowser(){
+    if(window.ethereum.isStatus){
+        return true;
+    }
+    else{
+        return false; 
+   }
+}
+
+async function enableProvider(){
+    try{
+        await window.ethereum.enable()
+    }catch(err){
+        console.log(error)
+    }
+}
+
+async function depositEther(amountInEthers){
+  let accounts = await web3.eth.getAccounts()
+  console.log(accounts[0])
+  let amountinWei = web3.utils.toWei(amountInEthers)
+  let txHash = await Exchange.methods.deposit()
+  .send({ from: accounts[0], value: web3.utils.toHex(amountinWei), gasPrice: web3.utils.toHex(1), nonce: await web3.eth.getTra
+nsactionCount()})
+  console.log(txHash);
+}
+
